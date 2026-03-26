@@ -96,68 +96,79 @@ int main (){
     int group, tu, i;
     char *secret, doan;
     srand(time(NULL));
-    //tung nhom + tung tu
-    char fruits[][20] = {"apple","banana","grape","mango","orange","lemon","peach","melon","cherry","papaya" };
+
+    printf("=====================================\n");
+    printf("        TRO CHOI DOAN TU\n");
+    printf("=====================================\n");
+
+    // danh sach tu
+    char fruits[][20] = {"apple","banana","grape","mango","orange","lemon","peach","melon","cherry","papaya"};
     char animals[][20] = {"cat","dog","tiger","lion","zebra","horse","sheep","goat","monkey","panda","rabbit","mouse","snake","eagle","shark","whale","dolphin","turtle","spider","butterfly"};
     char colors[][20] = {"red","blue","green","black","white","yellow","purple","orange","pink","brown"};
     
-    //chon nhom
+    // chon nhom
     group = rand() % 3;
     
-    //chon tu
+    // chon tu + goi y
     if (group == 0) {
-        printf("Goi y: Trai cay");
+        printf("-> Goi y: Trai cay ??\n");
         tu = rand() % 10;
         secret = fruits[tu];
     }
-    
     else if (group == 1) {
-        printf("Goi y: Dong vat");
+        printf("-> Goi y: Dong vat ??\n");
         tu = rand() % 20;
         secret = animals[tu];
     }
-    
     else {
-        printf("Goi y: Mau sac");
+        printf("-> Goi y: Mau sac ??\n");
         tu = rand() % 10;
         secret = colors[tu];
     }
-    printf("\n");
-    
-    //in ra
+
     int len = strlen(secret);
     char display[20];
+
+    printf("\n>> Tu can doan: ");
     for (i = 0; i < len; i++) {
         printf("_ ");
-        display[i] = ('_');
+        display[i] = '_';
     }
     display[len] = '\0';
-    
-    printf("\n");
-    printf("\n");
-    
-    
-    // he thong
+
+    printf("\n-------------------------------------\n");
+
+    // game loop
     while (strcmp(display, secret) != 0) {
 
-        printf("Nhap chu ban doan: ");
+        int found = 0;
+
+        printf("\nNhap chu ban doan: ");
         scanf(" %c", &doan);
 
         for (i = 0; i < len; i++) {
             if (secret[i] == doan) {
                 display[i] = doan;
+                found = 1;
             }
         }
 
+        if (found)
+            printf("[!] Doan dung!\n");
+        else
+            printf("[!] Sai roi!\n");
+
+        printf("Trang thai: ");
         for (i = 0; i < len; i++) {
             printf("%c ", display[i]);
         }
-
-        printf("\n\n");
+        printf("\n");
     }
 
-    printf("Ban da doan dung!\n");
-    printf("Tu la: %s\n", secret);
+    printf("\n=====================================\n");
+    printf("CHUC MUNG! BAN DA DOAN DUNG!\n");
+    printf("Tu can doan la: %s\n", secret);
+    printf("=====================================\n");
 
     return 0;
 }
